@@ -1,3 +1,5 @@
+package shurikenTargetPractice;
+
 /**
  * This class uses static methods to handle exceptions on Objects and primitives.
  */

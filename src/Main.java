@@ -1,3 +1,5 @@
+package shurikenTargetPractice;
+
 import javax.swing.JFrame;
 
 /**
