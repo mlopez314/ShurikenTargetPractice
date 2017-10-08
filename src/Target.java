@@ -31,7 +31,7 @@ public class Target {
    */
   public CollisionBox getCollisionOfTarget() {
     Posn topLeft = this.pos;
-    Posn bottomRight = new Posn(this.pos.x + 30, this.pos.y + 200);
+    Posn bottomRight = new Posn(this.pos.x + 25, this.pos.y + 200);
     
     return new CollisionBox(topLeft, bottomRight);
   }
@@ -43,7 +43,7 @@ public class Target {
    */
   public CollisionBox getCollisionOfCenter() {
     Posn topLeft = new Posn(this.pos.x, this.pos.y + 75);
-    Posn bottomRight = new Posn(this.pos.x + 30, this.pos.y + 125);
+    Posn bottomRight = new Posn(this.pos.x + 25, this.pos.y + 125);
     
     return new CollisionBox(topLeft, bottomRight);
   }

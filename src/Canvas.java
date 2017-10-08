@@ -22,7 +22,7 @@ public class Canvas extends JPanel implements KeyListener, ActionListener {
   private int currTick;
   
   private Target t1 = new Target(new Posn(1500, 500));
-  private Target t2 = new Target(new Posn(1575, 50));
+  private Target t2 = new Target(new Posn(1525, 50));
   
   private GameState gs = new GameState();
   
@@ -66,7 +66,7 @@ public class Canvas extends JPanel implements KeyListener, ActionListener {
     this.elapsedTime = System.nanoTime() - this.currTime;
     this.currTime = System.nanoTime();
     
-    if (this.elapsedTime / 1000000000.0 > .025) {
+    if (this.elapsedTime / 1000000000.0 > .025 && tm.getDelay() != 1) {
       tm.setDelay(tm.getDelay() - 1);
       System.out.println("New Timer Delay: " + tm.getDelay());
     } else if (this.elapsedTime / 1000000000.0 < .015) {

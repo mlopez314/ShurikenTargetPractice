@@ -4,7 +4,5 @@ Countdown - add a timer of some sort
 Center - target practice (bull's eye)
 Spinning - throwing shurikens
 
-Game Ideas: Target practice with spinning sharp objects (i.e. shurikens) with
-            a timer.
-
-Pitch: 
+Game Ideas: You are constantly throwing shurikens towards the target. You only have control
+            of the initial velocity of the shurikens when thrown.

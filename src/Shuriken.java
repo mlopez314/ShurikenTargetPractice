@@ -16,6 +16,7 @@ public class Shuriken {
   private Posn initVelocity;
   private Posn currVelocity;
   private int currSprite;
+  private boolean isMoving;
   
   /**
    * Constructor for Shuriken that initializes all above variables.
@@ -34,6 +35,7 @@ public class Shuriken {
     this.initVelocity = initVelocity;
     this.currVelocity = initVelocity;
     this.currSprite = 0;
+    this.isMoving = true;
   }
   
   /**
@@ -86,8 +88,24 @@ public class Shuriken {
    * @return true if shuriken is out of bounds
    */
   public boolean isOutOfBounds() {
-    return this.pos.x < -10 || this.pos.x > 1600
-        || this.pos.y > 800;
+    return this.pos.x < -10 || this.pos.x > 1550
+        || this.pos.y > 725 || this.pos.y < 0;
+  }
+  
+  /**
+   * Stops the shuriken from moving.
+   */
+  public void stopMoving() {
+    this.isMoving = false;
+  }
+  
+  /**
+   * Getter for this.isMoving
+   * 
+   * @return isMoving
+   */
+  public boolean isMoving() {
+    return this.isMoving;
   }
   
   /**
@@ -100,16 +118,18 @@ public class Shuriken {
   public void update(ArrayList<Integer> keys) {
     ExceptionHandler.checkNotNull(keys, "keys is null");
 
-    this.currVelocity.y += .03;
-    this.pos.shift(this.currVelocity.x, this.currVelocity.y);
+    if (isMoving) {
+      this.currVelocity.y += .03;
+      this.pos.shift(this.currVelocity.x, this.currVelocity.y);
+        
+      if (this.currSprite == 3) {
+        this.currSprite = 0;
+      } else {
+        this.currSprite += 1;
+      }
       
-    if (this.currSprite == 3) {
-      this.currSprite = 0;
-    } else {
-      this.currSprite += 1;
+      
+      this.sharpPoint = new Posn(this.pos.x + 50, this.pos.y + 25);
     }
-    
-    
-    this.sharpPoint = new Posn(this.pos.x + 50, this.pos.y + 25);
   }
 }

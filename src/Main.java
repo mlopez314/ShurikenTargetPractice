@@ -5,9 +5,7 @@ import javax.swing.JFrame;
  */
 public class Main {
   public static void main(String[] args) {
-    ExceptionHandler.checkNotNull(args, "args is null");
-    
-    JFrame frame = new JFrame();
+    JFrame frame = new JFrame("Shuriken Target Practice");
     frame.setSize(1600, 800);
     frame.setLocationRelativeTo(null);
     frame.setResizable(false);

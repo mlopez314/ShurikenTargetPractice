@@ -37,11 +37,23 @@ public class CollisionBox {
         && pos.y >= topLeft.y && pos.y <= bottomRight.y;
   }
   
+  /**
+   * Checks if this collision box and the given collision box touches or
+   * intersects each other.
+   * 
+   * @param cb the given collision box
+   * 
+   * @return true if collision boxes intersect each other
+   * 
+   * @throws IllegalArgumentException if given CollisionBox is null
+   */
   public boolean intersectsCollisionBox(CollisionBox cb) {
+    ExceptionHandler.checkNotNull(cb, "cb is null");
+    
     return this.intersectsPoint(cb.topLeft)
         || this.intersectsPoint(cb.bottomRight)
-        || this.intersectsPoint(new Posn(cb.topLeft.x + cb.bottomRight.x, cb.topLeft.y))
-        || this.intersectsPoint(new Posn(cb.bottomRight.x - cb.topLeft.x, cb.bottomRight.y));
+        || this.intersectsPoint(new Posn(cb.bottomRight.x, cb.topLeft.y))
+        || this.intersectsPoint(new Posn(cb.topLeft.x, cb.bottomRight.y));
   }
   
   @Override

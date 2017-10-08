@@ -18,7 +18,7 @@ public class GameState {
   private Posn initVelocity;
   private int throwCooldown;
 
-  Random rng = new Random();
+  private Random rng = new Random();
 
   /**
    * Constructor for GameState which initializes all uninitialized variables above.
@@ -85,21 +85,25 @@ public class GameState {
       s.draw(g);
     }
 
+    g.setColor(Color.WHITE);
+    g.fillRect(0, 0, 850, 150);
+    
     g.setColor(Color.BLACK);
     g.setFont(new Font("Consolas", 0, 25));
-    g.drawString("Initial Velocity:" + this.initVelocity.toString()
-    + " Use arrow keys to adjust.", 0, 25);
-    g.drawString("Timer: " + Integer.toString(this.countdown), 0, 50);
-    g.drawString("Score: " + Integer.toString(this.points), 0, 75);
+    g.drawString("Horizontal Speed (left/right arrow keys): ", 0, 25);
+    g.drawString("Vertical Speed   (up/down arrow keys)   :", 0, 50);
+    g.drawString("Timer: " + Integer.toString(this.countdown), 0, 75);
+    g.drawString("Score: " + Integer.toString(this.points), 0, 100);
 
+    g.setFont(new Font("Consolas", 0, 20));
     if (this.initVelocity.y <= 0) {
       g.setColor(Color.BLUE);
-      g.drawString("Min y-value reached. Adjust x-value to reach bottom targets.", 0, 125);
-    } 
+      g.drawString("Min vertical speed reached. Adjust horizontal speed to reach bottom targets.", 0, 140);
+    }
     
     if (this.initVelocity.x >= 20) {
       g.setColor(Color.RED);
-      g.drawString("Max x-value reached. Adjust y-value to reach top targets.", 0, 100);
+      g.drawString("Max horizontal speed reached. Adjust vertical speed to reach top targets.", 0, 120);
     }
     
     if (this.countdown == 0) {
@@ -108,6 +112,14 @@ public class GameState {
       g.drawString("Final Score: " + this.points, 200, 400);
       g.drawString("Press 'R' to reset" , 200, 450);
     }
+    
+    g.setColor(Color.RED);
+    g.drawRect(570, 5, 200, 20);
+    g.fillRect(570, 5, (int)(this.initVelocity.x * 10), 20);
+    
+    g.setColor(Color.BLUE);
+    g.drawRect(570, 30, 200, 20);
+    g.fillRect(570, 30, (int)(this.initVelocity.y * 10), 20);
   }
 
   /**
@@ -129,9 +141,8 @@ public class GameState {
           s.update(keys);
 
           if (s.isOutOfBounds()) {
-            this.shurikens.remove(i);
-            i -= 1;
-          } else {
+            s.stopMoving();
+          } else if (s.isMoving()) {
             for (int j = 0; j < this.targets.size(); j++) {
               Target t = this.targets.get(j);
 
@@ -140,19 +151,17 @@ public class GameState {
                 this.targets.remove(j);
                 this.shurikens.remove(i);
                 
-                Target newTarget = new Target(new Posn(rng.nextInt(775) + 800, rng.nextInt(600)));
+                Target newTarget = new Target(new Posn(rng.nextInt(675) + 850, rng.nextInt(600)));
                 
                 while (newTarget.getCollisionOfTarget().intersectsCollisionBox(this.targets.get(0).getCollisionOfTarget())
                     || this.targets.get(0).getCollisionOfTarget().intersectsCollisionBox(newTarget.getCollisionOfTarget())) {
                   System.err.println("New target moved due to overlap.");
-                  newTarget = new Target(new Posn(rng.nextInt(775) + 800, rng.nextInt(600)));
+                  newTarget = new Target(new Posn(rng.nextInt(675) + 850, rng.nextInt(600)));
                 }
                 
                 this.addTarget(newTarget);
-                i -= 1;
               } else if (s.collidesWithTarget(t)) {
                 this.shurikens.remove(i);
-                i -= 1;
               }
             }
           }
@@ -193,6 +202,10 @@ public class GameState {
       if (keys.contains(KeyEvent.VK_R)) {
         this.reset();
       }
+      
+      if (this.shurikens.size() > 20) {
+        this.shurikens.remove(0);
+      }
     } catch (Exception e) {
       System.err.println("Error has occurred midgame. Resetting...");
       e.printStackTrace();
@@ -206,7 +219,7 @@ public class GameState {
    */
   public void reset() {
     Target t1 = new Target(new Posn(1500, 500));
-    Target t2 = new Target(new Posn(1575, 50));
+    Target t2 = new Target(new Posn(1525, 50));
 
     this.countdown = 100;
     this.points = 0;

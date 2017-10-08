@@ -68,8 +68,7 @@ public class Posn {
           && Math.abs(this.y - that.y) < 0.001;
     } else {
       return false;
-    }
-    
+    } 
   }
   
   @Override
