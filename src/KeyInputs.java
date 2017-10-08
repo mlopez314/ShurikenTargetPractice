@@ -7,6 +7,9 @@ public class KeyInputs {
   
   private ArrayList<Integer> currKeys;
   
+  /**
+   * Constructor for KeyInputs that initializes currKeys with an empty list.
+   */
   public KeyInputs() {
     this.currKeys = new ArrayList<Integer>();
   }

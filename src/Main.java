@@ -1,5 +1,8 @@
 import javax.swing.JFrame;
 
+/**
+ * This is the class that contains the main method.
+ */
 public class Main {
   public static void main(String[] args) {
     ExceptionHandler.checkNotNull(args, "args is null");
