@@ -33,7 +33,6 @@ public final class KeyInputsTest {
     assertEquals(keys.getKeys(), new ArrayList<Integer>(Arrays.asList(20)));
     keys.removeKey(20);
     assertEquals(keys.getKeys(), new ArrayList<Integer>());
-    
   }
   
   private void initKeys() {

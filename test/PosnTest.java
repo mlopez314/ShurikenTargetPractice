@@ -28,6 +28,6 @@ public final class PosnTest {
     Posn pos2 = new Posn(2.145, 5.001);
     
     assertEquals("(2.0, 5.0)", pos1.toString());
-    assertEquals("(2.145, 5.001)", pos2.toString());
+    assertEquals("(2.1, 5.0)", pos2.toString());
   }
 }
