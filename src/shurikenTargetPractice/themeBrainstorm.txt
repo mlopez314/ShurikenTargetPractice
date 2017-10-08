@@ -1,0 +1,8 @@
+Themes: Spinning Farming Center Countdown Puppets
+
+Countdown - add a timer of some sort
+Center - target practice (bull's eye)
+Spinning - throwing shurikens
+
+Game Ideas: You are constantly throwing shurikens towards the target. You only have control
+            of the initial velocity of the shurikens when thrown.
